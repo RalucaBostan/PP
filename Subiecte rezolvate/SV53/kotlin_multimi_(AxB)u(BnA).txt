@@ -1,0 +1,58 @@
+import javax.swing.plaf.ProgressBarUI
+
+fun generareMultimeA() : MutableList<Int> {
+    var filtrare = {x : Int -> if(x < 0) 0 else x}
+    var A =  1.until(100).map{filtrare((8 * it - 18)/(2 * it - 9))}.toMutableList()
+    return A
+}
+
+fun generareMultimeB() : MutableList<Int>{
+    return 1.until(100).map{((9*Math.pow(it.toDouble(),2.0) - 48 * it + 16)/(3 * it - 8)).toInt()}.toMutableList()
+}
+
+fun intersectie(A : MutableList<Int>,B : MutableList<Int>) : MutableList<Int>{
+    var rezultat : MutableList<Int> = mutableListOf()
+    B.map{
+        if(it in A){
+            rezultat.add(it)
+        }
+    }
+    return rezultat
+}
+
+fun produsCartezian(A : MutableList<Int>,B : MutableList<Int>) : MutableList<Pair<Int,Int>>{
+    var produs : List<Pair<Int,Int>> = mutableListOf()
+    var rezultat : MutableList<Pair<Int,Int>> = mutableListOf<Pair<Int,Int>>()
+    A.map{
+        var intermediar = (1..100).map {it}
+        var rez = intermediar.zip(B).toMutableList()
+        rez.map{
+            rezultat.add(it)
+        }
+    }
+    return rezultat
+}
+
+fun Reuniune(A : MutableList<Int>,B : MutableList<Pair<Int,Int>>) : HashMap<Int,Int>{
+    var hashMap : HashMap<Int,Int> = hashMapOf()
+    A.forEach{
+        hashMap.put(it,0)
+    }
+    B.forEach{
+        hashMap.put(it.first,it.second)
+    }
+    return hashMap
+}
+fun main(args : Array<String>){
+    var A : MutableList<Int> = generareMultimeA()
+    var B : MutableList<Int> = generareMultimeB()
+
+    println("Multimea A : ${A}")
+    println("Multimea B : ${B}")
+
+    var ProdusCartezian = produsCartezian(A,B)
+    var Intersectie = intersectie(A,B)
+
+    var ReuniuneFinala = Reuniune(Intersectie,ProdusCartezian)
+    println(ReuniuneFinala)
+}

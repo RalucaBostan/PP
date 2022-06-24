@@ -1,0 +1,95 @@
+import java.util.concurrent.Semaphore
+import kotlin.concurrent.thread
+
+interface Cladire{
+    fun AdaugaClient(client: Client)
+    fun AdaugaActivitate(activitate  : Activitate)
+}
+
+abstract class Instanta(var name : String)
+
+data class Client(var nume : String) : Instanta(nume)
+
+data class Activitate(var nume : String) : Instanta(nume)
+
+
+class SalaDeSport(var adresa : String,var capacitateMaxima : Int) : Cladire{
+    var clienti : MutableList<Client> = mutableListOf()
+    var activitati : MutableList<Activitate> = mutableListOf()
+    var ocupat : Boolean = false
+    override fun AdaugaClient(client: Client) {
+        if(this.capacitateMaxima > this.clienti.size){
+            this.clienti.add(client)
+        }
+    }
+
+    override fun AdaugaActivitate(activitate: Activitate) {
+        this.activitati.add(activitate)
+    }
+
+    fun startActivitate(name : String){
+        if(ocupat == true){
+            println("Nu se poate practica o activitate momentan!")
+        }
+        else{
+            var gasit : Activitate? = this.activitati.filter { it.nume.equals(name)}[0]
+            if(gasit != null){
+                println("In sala se practica ${name}. ")
+            }
+        }
+    }
+
+    fun stopActiviate(){
+        this.ocupat = false
+    }
+
+    override fun toString(): String {
+        var string = ""
+        string += "Sala de sport de la adresa ${adresa} are o capacitate maxima de ${capacitateMaxima}.\n"
+        string += "In sala, momentan exista suport pentru "
+        activitati.forEach{
+            string += it.nume + " "
+        }
+        string += "\nMomentan in sala sunt ${clienti.size} persoane : "
+        clienti.forEach{
+            string += it.nume + " "
+        }
+        string += "\n\n"
+        return string
+    }
+}
+
+
+fun main(){
+    val semaphore = Semaphore(1)
+    var salaDeSport = SalaDeSport("Dimitrie Leonida",20).apply {
+        AdaugaActivitate(Activitate("fotbal"))
+        AdaugaActivitate(Activitate("volei"))
+        AdaugaActivitate(Activitate("gimnastica"))
+        AdaugaClient(Client("Vasile"))
+        AdaugaClient(Client("Andrei"))
+        AdaugaClient(Client("Daniel"))
+        AdaugaClient(Client("Dumitru"))
+        AdaugaClient(Client("Rares"))
+        AdaugaClient(Client("Bogdan"))
+        AdaugaClient(Client("Mihai"))
+        AdaugaClient(Client("Horia"))
+        AdaugaClient(Client("Dandanache"))
+        AdaugaClient(Client("Stefan"))
+        AdaugaClient(Client("Dorian"))
+    }
+
+    println(salaDeSport)
+
+    var fotbal = thread(start = true){
+        salaDeSport.startActivitate("fotbal")
+        Thread.sleep(5000)
+        semaphore.acquire()
+        salaDeSport.stopActiviate()
+        semaphore.release()
+    }
+
+    semaphore.acquire()
+    salaDeSport.startActivitate("volei")
+    semaphore.release()
+}

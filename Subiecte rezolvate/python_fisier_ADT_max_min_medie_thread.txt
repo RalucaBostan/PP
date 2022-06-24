@@ -1,0 +1,40 @@
+import threading
+from functools import reduce
+import math
+
+
+def prob1(listtxt):
+    maxim = max(listtxt)
+    minim = min(listtxt)
+    medie = reduce(lambda a, b: a + b, listtxt) / len(listtxt)
+    medie_patratica = math.sqrt(sum(map(lambda n: n * n / (len(listtxt)), listtxt)))
+    rez = list(filter(lambda x: (medie - medie_patratica <= x <= medie + medie_patratica), listtxt))
+    print("\n" + "Nr min: " + str(minim) + ", nr max: " + str(maxim) + ", media: " + str(medie))
+    print(rez)
+
+
+if __name__ == "__main__":
+    f = open("intrare.txt", "r")
+    list1 = f.readline()
+    list1 = list1.split(" ")
+    list2 = []
+    for i in list1:
+        list2.append(int(i))
+    if len(list2) < 50:
+        print("Insereaza mai multe numere")
+    else:
+        thread_01 = threading.Thread(target=prob1(list2[0:9]))
+        thread_02 = threading.Thread(target=prob1(list2[10:19]))
+        thread_03 = threading.Thread(target=prob1(list2[20:29]))
+        thread_04 = threading.Thread(target=prob1(list2[30:39]))
+        thread_05 = threading.Thread(target=prob1(list2[40:49]))
+        thread_01.start()
+        thread_01.join()
+        thread_02.start()
+        thread_02.join()
+        thread_03.start()
+        thread_03.join()
+        thread_04.start()
+        thread_04.join()
+        thread_05.start()
+        thread_05.join()

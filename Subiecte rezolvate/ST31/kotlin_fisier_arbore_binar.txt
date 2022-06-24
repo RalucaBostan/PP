@@ -1,0 +1,51 @@
+import java.io.File
+
+class Nod(var valoare:String, var left:Nod?, var right:Nod?){
+
+}
+
+fun creareBST(a:MutableList<String>):Nod
+{
+    val rad=Nod(a[0], null, null)
+    for (i in a)
+    {
+        insertBST(rad, i)
+    }
+    return rad
+}
+
+fun insertBST(r:Nod?, valoare:String):Nod?
+{
+    if(r==null){
+        return Nod(valoare, null, null)
+    }
+    if(valoare < r.valoare){
+        r.left=insertBST(r.left, valoare)
+    }
+    else if(valoare > r.valoare){
+        r.right=insertBST(r.right, valoare)
+    }
+    return r
+}
+
+fun afisare(r:Nod?)
+{
+    if(r==null){
+        return
+    }
+    afisare(r.left)
+    print(r.valoare)
+    afisare(r.right)
+}
+
+fun main(args:Array<String>){
+    val lines: List<String> =File("in.txt").readLines()
+    var words = mutableListOf<String>()
+    lines.forEach{var line=it.split(""))
+        line.forEach{ words.add(it) }
+    }
+    println(words)
+
+    val r=creareBST(words)
+    afisare(r)
+}

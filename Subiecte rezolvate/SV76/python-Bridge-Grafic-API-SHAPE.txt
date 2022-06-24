@@ -1,0 +1,74 @@
+import tkinter as tk
+
+class Shape:
+    def __init__(self,drawingAPI,x,y,color):
+        self.drawingAPi = drawingAPI
+        self.x = x
+        self.y = y
+        self.color = color
+
+    def draw(self) : pass
+
+class Circle(Shape):
+    def __init__(self,drawingAPI,x,y,radius,color):
+        super().__init__(drawingAPI,x,y,color)
+        self.radius = radius
+
+    def draw(self):
+        print("Se deseneaza un cerc")
+        self.drawingAPi.drawcircle(self.x,self.y,[self.radius,0],self.color)
+
+class Square(Shape):
+    def __init__(self,drawingAPI,x,y,l,color):
+        super().__init__(drawingAPI,x,y,color)
+        self.l = l
+
+    def draw(self):
+        print("Se deseneaza un patrat")
+        self.drawingAPi.drawsquare(self.x,self.y,[self.l,0],self.color)
+
+class Rectangle(Shape):
+    def __init__(self,drawingAPI,x,y,L,l,color):
+        super().__init__(drawingAPI,x,y,color)
+        self.l = l
+        self.L = L
+
+    def draw(self):
+        print("Se deseneaza un patrat")
+        self.drawingAPi.drawrectangle(self.x,self.y,[self.l,self.L],self.color)
+
+
+class DrawingAPI(tk.Frame):
+    def __init__(self,master = None):
+        super().__init__()
+        self.master = master
+        self.drawing = tk.Canvas(self.master,bg="#FFFFFF",width=500,height=500)
+
+    def drawcircle(self,x,y,l,color):
+        self.drawing.create_oval(x,y,200,200,fill =color)
+        self.drawing.pack()
+
+    def drawsquare(self,x,y,l,color):
+        self.drawing.create_rectangle(x,y,l[1],l[0],fill=color)
+        self.drawing.pack()
+
+    def drawrectangle(self,x,y,l,color):
+        self.drawing.create_rectangle(x,y,l[0],l[0],fill=color)
+        self.drawing.pack()
+
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    root.geometry("500x500")
+    API = DrawingAPI(root)
+
+    circle = Circle(API,300,300,10,"#FF0000")
+    circle.draw()
+    square = Square(API,200,200,0,"#00FF00")
+    square.draw()
+    rectangle = Rectangle(API,350,100,30,10,"#0000FF")
+    rectangle.draw()
+    tk.mainloop()
+
+
+
