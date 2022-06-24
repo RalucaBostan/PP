@@ -1,0 +1,77 @@
+plugins {
+    id 'kotlin-multiplatform'
+}
+
+def hostPreset = determinePreset()
+
+kotlin {
+    targets {
+        fromPreset(hostPreset, 'P2') {
+            compilations.main.outputKinds 'EXECUTABLE'
+            compilations.main.entryPoint 'P2.main'
+			compilations.main.linkerOpts "-L${MPPTools.mingwPath()}/lib",
+                '-Wl,-Bstatic',
+                '-lstdc++',
+                '-static',
+                '-lSDL2',
+                '-limm32',
+                '-lole32',
+                '-loleaut32',
+                '-lversion',
+                '-lwinmm',
+                '-lsetupapi',
+                '-mwindows'
+
+            compilations.main.cinterops {
+                sdl {
+                    switch (hostPreset) {
+                        case presets.macosX64:
+                            includeDirs '/opt/local/include/SDL2', '/usr/local/include/SDL2'
+                            break
+                        case presets.linuxX64:
+                            includeDirs '/usr/include/SDL2'
+                            break
+                        case presets.mingwX64:
+                            includeDirs "${MPPTools.mingwPath()}/include/SDL2"
+                            break
+                        case presets.linuxArm32Hfp:
+                            includeDirs "${MPPTools.kotlinNativeDataPath()}/dependencies/target-sysroot-1-raspberrypi/usr/include/SDL2"
+                            break
+                    }
+                }
+            }
+        }
+    }
+}
+
+MPPTools.createRunTask(project, 'runProgram', kotlin.targets.P2) {
+    workingDir = project.provider {
+        kotlin.targets.P2.compilations.main.getBinary('EXECUTABLE', buildType).parentFile
+    }
+}
+
+afterEvaluate {
+    kotlin.targets.P2.compilations.main { mainCompilation ->
+        def linkTasks = ['RELEASE', 'DEBUG']
+                .collect { mainCompilation.findLinkTask('EXECUTABLE', it) }
+                .findAll { it != null }
+
+        def compileWindowsResourcesTask = tasks.findByName('compileWindowsResources')
+
+        linkTasks.each { task ->
+            if (compileWindowsResourcesTask != null)
+                task.dependsOn compileWindowsResourcesTask
+        }
+    }
+}
+
+private def determinePreset() {
+    def preset = isRaspberryPiBuild() ? kotlin.presets.linuxArm32Hfp /* aka RaspberryPi */ : MPPTools.defaultHostPreset(project)
+    println("$project has been configured for ${preset.name} platform.")
+    preset
+}
+
+// If host platform is Linux and RaspberryPi target is activated.
+private boolean isRaspberryPiBuild() {
+    MPPTools.isLinux() && Boolean.parseBoolean(project.findProperty('P2.raspberrypi.build') as String)
+}

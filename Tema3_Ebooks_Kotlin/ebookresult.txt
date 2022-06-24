@@ -1,0 +1,70 @@
+<nume autor eliminat>
+<nume capitol eliminat
+Unified Modeling Language  (UML) is a graphical language for visualizing, specifying, constructing, and
+documenting the artifacts of a software - intensive system.
+It offers a standard way to write a system’s blueprints, including conceptual things such as business processes and system functions as well as concrete
+things such as programming language statements, database schemas, and reusable software components. <nume autor eliminat>
+
+<deleted num_page>
+
+<nume capitol eliminat
+A use case is a set of scenarios that describing an interaction between a user and a system. A use
+case diagram displays the relationship among actors and use cases. The two main components of a use case diagram are use cases and actors.
+An actor is represents a user or another system that will interact with the system you are modeling.
+A use case is an external view of  the system that represents some action the user might perform in order to complete a task.
+
+<deleted num_page>
+
+<nume capitol eliminat
+This example shows the customer as a actor
+because the customer is using the ordering
+system. The diagram takes the simple steps
+listed above and shows them as actions the
+customer might perform. The salesperson could also be included in this use case diagram
+because the salesperson is also inte
+racting with the ordering system.
+From this simple diagram  the requiremen
+ts of the ordering system can easily be
+derived. The system will need to be able to
+perform actions for all of the use cases
+listed. As the project progresses other us
+e cases might appear. The customer might have
+a need to add an item to an order that has already been placed. This diagram can easily be
+expanded until a complete description of the orde
+ring system is  derived capturing all of the
+requirements that the system will need to perform.
+
+<deleted num_page>
+
+<nume capitol eliminat
+Class diagrams are widely used to describe t
+he types of objects in a system and their
+relationships. Class diagrams model class st
+ructure and contents using design elements such as
+classes, packages and objects.
+
+Class diagrams describe three different perspectives when
+designing a system, conceptual, specification, and implementation.
+These perspectives become
+evident as the diagram is created and help solidify the design. This example is only meant as an
+introduction to the UML and class diagrams.
+If you would like to learn more see the
+Resources page for more detailed resources on UML.
+Classes are composed of three things: a name, attributes, and operations.
+
+<deleted num_page>
+
+<nume autor eliminat>
+<nume capitol eliminat
+Nu toate simbolurile care insotesc literele sunt semne diacritice. De exemplu, in multe limbi, punctul din literele minuscule i si j face parte din corpul literei.
+Uneori un simbol atasat unei litere se poate considera semn diacritic intr-o limba si parte a literei in alta.Tineretea lui Creanga este bine cunoscuta publicului larg
+prin prisma operei sale capitale Amintiri din copilarie. In 1847 incepe scoala de pe langa biserica din satul natal.
+Fiu de taran, este pregatit mai intai de dascalul din sat, dupa care mama sa il incredinteaza bunicului matern (<nume autor eliminat>),
+David Creanga, care-l duce pe valea Bistritei, la Brosteni, unde continua scoala.[6] In 1853 este inscris la Scoala Domneasca de la Targu Neamt sub numele Stefanescu Ion,
+unde il are ca profesor pe parintele Isaia Teodorescu (Popa Duhu). Dupa dorinta mamei, care voia sa-l faca preot, este inscris la Scoala catihetica din Falticeni
+(<nume autor eliminat>). Aici apare sub numele de Ion Creanga, nume pe care l-a pastrat tot restul vietii. Dupa desfiintarea scolii din Falticeni, este silit sa plece la Iasi,
+absolvind cursul inferior al Seminarului teologic <nume autor eliminat> de la Socola
+
+<deleted num_page>
+
+<nume autor eliminat>

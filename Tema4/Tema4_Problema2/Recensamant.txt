@@ -1,0 +1,45 @@
+Tara : [Romania]
+Capitala : [Bucuresti Resedinta din 1459]
+-------Judete-------
+0. Judet : [Iasi]
+	Comune : 
+		Comuna : [Osoi]
+		Sate Componente : 
+			0. Nume : [Badeni], Locuitori : [1700], Nr_Case : [321]
+			1. Nume : [Cucuteni], Locuitori : [3200], Nr_Case : [1419]
+
+		Comuna : [Mironeasa]
+		Sate Componente : 
+			0. Nume : [Poieni], Locuitori : [4210], Nr_Case : [1771]
+
+	Orase componente : 
+			Oras : [Pascani]. Locuitori : [34200], Nr_Blocuri : [210], Spitale : [2]
+			Oras : [Iasi]. Locuitori : [800000], Nr_Blocuri : [3400], Spitale : [7]
+
+1. Judet : [Neamt]
+	Comune : 
+		Comuna : [Dumbrava Rosie]
+		Sate Componente : 
+			0. Nume : [Cut], Locuitori : [5200], Nr_Case : [1807]
+			1. Nume : [Brasauti], Locuitori : [2900], Nr_Case : [660]
+			2. Nume : [Valeni], Locuitori : [2450], Nr_Case : [1000]
+			3. Nume : [Izvoare], Locuitori : [5200], Nr_Case : [1205]
+
+	Orase componente : 
+			Oras : [Piatra Neamt]. Locuitori : [300000], Nr_Blocuri : [1780], Spitale : [1]
+			Oras : [Roman]. Locuitori : [150000], Nr_Blocuri : [630], Spitale : [1]
+
+2. Judet : [Bucuresti]
+	Comune : 
+		Comuna : [Cornetu]
+		Sate Componente : 
+			0. Nume : [Piteasca], Locuitori : [4700], Nr_Case : [450]
+
+		Comuna : [Jilava]
+		Sate Componente : 
+			0. Nume : [Tamasi], Locuitori : [2300], Nr_Case : [650]
+
+	Orase componente : 
+			Oras : [Bucuresti]. Locuitori : [2500000], Nr_Blocuri : [8901], Spitale : [15]
+			Oras : [Ilfov]. Locuitori : [460000], Nr_Blocuri : [3400], Spitale : [5]
+
