@@ -1,0 +1,20 @@
+[Comuna]  --->   A fost adaugat satul Badeni
+[Comuna]  --->   A fost adaugat satul Cucuteni
+[Comuna]  --->   A fost adaugat satul Poieni
+[Comuna]  --->   A fost adaugat satul Cut
+[Comuna]  --->   A fost adaugat satul Brasauti
+[Comuna]  --->   A fost adaugat satul Valeni
+[Comuna]  --->   A fost adaugat satul Izvoare
+[Judet]  --->   A fost adaugata comuna Osoi
+[Judet]  --->   A fost adaugata comuna Mironeasa
+[Judet]  --->   A fost adaugat orasul Pascani
+[Judet]  --->   A fost adaugat orasul Iasi
+[Judet]  --->   A fost adaugata comuna Dumbrava Rosie
+[Judet]  --->   A fost adaugat orasul Piatra Neamt
+[Judet]  --->   A fost adaugat orasul Roman
+[Comuna]  --->   A fost adaugat satul Piteasca
+[Comuna]  --->   A fost adaugat satul Tamasi
+[Judet]  --->   A fost adaugata comuna Cornetu
+[Judet]  --->   A fost adaugata comuna Jilava
+[Judet]  --->   A fost adaugat orasul Bucuresti
+[Judet]  --->   A fost adaugat orasul Ilfov
