@@ -1,0 +1,28 @@
+fun paramDupaVararg(nrCurs : Int, vararg lista_studenti : String,tempCamera : Double){
+    println("Numar curs : ${nrCurs}")
+    lista_studenti.sort()
+    println("Studenti prezenti : $lista_studenti")
+    println("Temperatura camerei : ${tempCamera}")
+}
+
+fun test(x :Int,y:String,f : (Int,String) -> Unit){
+    f(x,y)
+}
+fun alt_test(f:(nume:String,varsta : Int) -> Unit){
+    f("Strula",10)
+}
+
+fun main(args : Array<String>){
+    paramDupaVararg(3,"Dorcu Andrei", "Stratulat Stefan", "Moisii Marin", tempCamera = 24.0)
+    val nr = 1
+    val nume ="Bula"
+    test(nr,nume){
+        q,w ->
+        println("Este nr. ${q} si se numeste ${w}")
+    }
+
+    alt_test{
+        nume,varsta->
+        println("Il cheama ${nume} si are ${varsta} ani.")
+    }
+}

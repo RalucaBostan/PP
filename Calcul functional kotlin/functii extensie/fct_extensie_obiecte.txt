@@ -1,0 +1,28 @@
+object Constructor{}
+
+fun Constructor.casaNouaCaramida() = "casa de pamant"
+
+class Proiectant{
+    companion object{}
+    object Birou{}
+}
+
+fun Proiectant.Companion.prototipNou() = "montaj test"
+
+fun Proiectant.Birou.mapaDeLucru() = listOf("Proiect casa","Proiect bloc")
+
+fun lambdaPrintList(lista : List<String>,functie : (String) -> Unit){
+    lista.forEach{
+        functie(it)
+    }
+}
+
+
+fun main(){
+    println(Constructor.casaNouaCaramida())
+    println(Proiectant.prototipNou())
+    Proiectant.Birou.mapaDeLucru().forEach{x : String -> println(x)}
+
+    lambdaPrintList(Proiectant.Birou.mapaDeLucru()){x:String -> println(x)}
+}
+

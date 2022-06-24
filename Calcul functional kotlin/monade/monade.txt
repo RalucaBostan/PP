@@ -1,0 +1,8 @@
+fun main(){
+    val rezultat = listOf(1,2,3)
+        .flatMap { i -> listOf(i * 2,i + 3) }
+        .joinToString ("|")
+
+
+    println("La procesarea monadica a rezultat ${rezultat}")
+}

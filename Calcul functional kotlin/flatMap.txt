@@ -1,0 +1,12 @@
+fun main(){
+    var lista1 = List(10){
+        (26..120).shuffled().first()
+    }
+
+    println(lista1)
+
+    val listaBatutaCuCiocanul = lista1.flatMap {
+        it.rangeTo(it + 2*it).toList()
+    }
+    println("Lista dupa aplicarea flatMap este $listaBatutaCuCiocanul")
+}

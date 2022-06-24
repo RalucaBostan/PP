@@ -1,0 +1,20 @@
+infix fun Int.SumaSmecheraCu(i : Int) = this + i
+
+object Masini{
+    infix fun ne(apartin : Apartin) = this
+}
+
+object Apartin
+object Noua
+
+
+object Toate{
+    infix fun aleTale(base : Pair<Masini,Noua>){}
+}
+
+
+fun main(){
+    println(4 SumaSmecheraCu 7)
+    println(2.SumaSmecheraCu(11))
+    println(Toate aleTale (Masini ne Apartin to Noua))
+}

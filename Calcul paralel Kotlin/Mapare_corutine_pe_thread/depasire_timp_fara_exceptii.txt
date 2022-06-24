@@ -1,0 +1,22 @@
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withTimeout
+import kotlinx.coroutines.withTimeoutOrNull
+
+fun main(){
+    if(lenes() == null) println("ma opresc din lene")
+}
+
+fun lenes() : String?{
+    var status : String? = ""
+    runBlocking {
+        val status1 = withTimeoutOrNull(2000L){
+            repeat(30){i->println("Cacul numarul $i...")
+            delay(200L)
+            }
+            "Gata"
+        }
+        status = status1
+    }
+    return status
+}

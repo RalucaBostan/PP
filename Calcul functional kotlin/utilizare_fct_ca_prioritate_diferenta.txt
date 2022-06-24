@@ -1,0 +1,5 @@
+fun main(args : Array<String>){
+    val dif_numere = {x:Int,y:Int->x-y}
+    println("Diferenta 1 este ${dif_numere(33,66)}")
+    println("Diferenta 2 este ${dif_numere(77,11)}")
+}

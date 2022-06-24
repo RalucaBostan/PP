@@ -1,0 +1,24 @@
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlin.system.measureTimeMillis
+import kotlinx.coroutines.channels.*
+import kotlinx.coroutines.delay
+import java.util.concurrent.atomic.AtomicInteger
+
+fun main(args : Array<String>) = runBlocking {
+    val time = measureTimeMillis {
+        val channel = Channel<Int>()
+        launch{
+            repeat(10){
+                delay(1)
+                channel.send(it)
+                println("Am trimit $it")
+            }
+        }
+        for(i in 1..10){
+            print("Am primit : ")
+            channel.receive()
+        }
+    }
+    println("Procesul a durat $time ms")
+}

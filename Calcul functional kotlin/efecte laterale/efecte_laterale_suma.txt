@@ -1,0 +1,9 @@
+fun main(args : Array<String>){
+    var nr1 = 10
+    var nr2 = 15
+    var sumaf : (Int,Int) -> Int = {x,y ->x + y}
+    fun sumak(x:Int,y:Int) = x+y
+    fun executaOperatia(x:Int,y:Int,funct : (Int,Int) -> Int) = funct(x,y)
+    println("Suma dintre ${nr1} si ${nr2} este ${executaOperatia(nr1,nr2,sumaf)}")
+    println("Suma dintre ${nr1} si ${nr2} este ${executaOperatia(nr1,nr2,::sumak)}")
+}

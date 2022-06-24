@@ -1,0 +1,8 @@
+fun main(){
+    val lista = 1.until(25).toList()
+    val catIau = 12
+    println("Iau primele ${catIau} din lista -> ${lista.take(catIau)}")
+    println("Iau ultimele ${catIau} din lista -> ${lista.takeLast(catIau)}")
+    println("Iau primele ${catIau} din lista -> ${lista.takeWhile { it <= catIau }}")
+    println("Iau toate elementele incepand de la indexul ${catIau} -> ${lista.takeLastWhile { it >= catIau }}")
+}

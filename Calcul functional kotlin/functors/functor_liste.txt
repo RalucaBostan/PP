@@ -1,0 +1,17 @@
+fun List<Int>.converLaStr() : List<String> =
+    if (size > 0)
+        this.map{"${procesare(procesareLambda(it,5))}"}
+    else
+        emptyList()
+
+
+val procesareLambda = {x : Int,y : Int -> x + y}
+
+fun procesare(x : Int) : Int{
+    return x + 5
+}
+
+fun main(){
+    val ListaIntregi = listOf(271,3,17,23,51)
+    println(ListaIntregi.converLaStr())
+}

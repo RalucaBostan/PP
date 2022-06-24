@@ -1,0 +1,28 @@
+open class Canina{
+    open fun vorbeste() = "Un animal din clasa Canina face : ham ham!"
+}
+
+
+class Caine : Canina(){
+    override fun vorbeste() = "Un caine face : vauf vauf!"
+}
+
+
+fun mesajScris(canina: Canina){
+    println(canina.vorbeste())
+}
+
+
+fun mesajScris1(canina: Canina){
+    println(canina.vorbeste1())
+}
+
+fun Caine.vorbeste() = "Din functia extensie Un caine face vauf vauf!"
+
+fun Canina.vorbeste1() = "functie extensie specifica cainelui"
+
+fun main(args : Array<String>){
+    mesajScris(Canina())
+    mesajScris(Caine())
+    mesajScris1(Caine())
+}

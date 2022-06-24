@@ -1,0 +1,26 @@
+sealed class TipSimplu<out T>{
+    object None : TipSimplu<Nothing>(){
+        override fun toString() = "cu None"
+    }
+
+    data class Some<out T>(val value : T) : TipSimplu<T>()
+    companion object
+}
+
+
+fun <T,R> TipSimplu<T>.map(transformare : (T) -> R) : TipSimplu<R> = when(this){
+    TipSimplu.None ->TipSimplu.None
+    is TipSimplu.Some -> TipSimplu.Some(transformare(value))
+}
+
+
+fun main(){
+    /*listOf(1,2,3)
+        .map{i -> i*2}
+        .map(Int::toString)
+        .forEach(::print)
+    */
+
+    println(TipSimplu.Some("Simulare cu Some").map(String::toUpperCase))
+    println(TipSimplu.None.map(String::toUpperCase))
+}

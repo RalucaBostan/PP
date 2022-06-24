@@ -1,0 +1,18 @@
+import kotlinx.coroutines.*
+fun main() = runBlocking<Unit>{
+    launch{
+        println("Corutina principala runBlocking : Sunt in thread ${Thread.currentThread().name}")
+    }
+
+    launch(Dispatchers.Unconfined){
+        println("Independenta   : Sunt in thread ${Thread.currentThread().name}")
+    }
+
+    launch(Dispatchers.Default){
+        println("Implicita   :  Sunt in thread ${Thread.currentThread().name}")
+    }
+
+    launch(newSingleThreadContext("ThreadulMeu")){
+        println("newSingleThreadContext   :  Sunt in thread ${Thread.currentThread().name}")
+    }
+}

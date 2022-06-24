@@ -1,0 +1,50 @@
+open class Felina
+
+open class Pisica() : Felina()
+
+open class Primatah(val name : String)
+
+fun Primatah.vorbeste() = "$name : face uhaha uhaha uhaha"
+
+open class MaimutaMaree(name : String) : Primatah(name)
+
+fun MaimutaMaree.vorbeste() = "${this.name} : urlet"
+
+fun mesajScris(primatah: Primatah){
+    println(primatah.vorbeste())
+}
+
+open class Ingrijitor(val name : String){
+    open fun Felina.react() = "HRRMR!!"
+    fun Primatah.react() = "$name se joaca cu ${this@Ingrijitor.name}"
+
+    fun areGrija(felina: Felina){
+        println("Felina face : ${felina.react()}")
+    }
+
+    fun areGrija(primatah: Primatah){
+        println("Primata spune : ${primatah.react()}")
+    }
+
+    fun Ingrijitor.react() = "$name din afara clasei se joaca cu ${this@Ingrijitor.name}"
+}
+
+open class Vet(name: String) : Ingrijitor(name){
+    override fun Felina.react() = "fuge de $name"
+}
+
+fun main(){
+    val om = Ingrijitor("ingrijitorul")
+    val pisica = Pisica()
+    val maimutaMare = Primatah("maimuta")
+    val femeie = Vet("Corin")
+    mesajScris(Primatah("Alex"))
+    mesajScris(MaimutaMare("gibon"))
+    om.areGrija(pisica)
+    om.areGrija(maimutaMare)
+    listOf(om,femeie).forEach{ ingrijitor->
+        println("${ingrijitor.javaClass.simpleName} ${ingrijitor.name}")
+        ingrijitor.areGrija(pisica)
+        ingrijitor.areGrija(maimutaMare)
+    }
+}

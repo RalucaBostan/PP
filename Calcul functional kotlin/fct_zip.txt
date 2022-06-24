@@ -1,0 +1,12 @@
+fun main(){
+    val lista1 = listOf(1,2,3,4,5,6)
+    val lista2 = (1..5).map { "element $it" }
+
+    println("Lista 1 : ${lista1}")
+    println("Lista 2 : ${lista2}")
+
+    val listaRezultat = lista1.zip(lista2)
+    println(listaRezultat)
+    println("Utilizare zipWithNext -> ${lista1.zipWithNext()}")
+
+}

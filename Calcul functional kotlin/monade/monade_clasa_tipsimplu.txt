@@ -1,0 +1,56 @@
+sealed class TippSimplu<out T>{
+    object None : TippSimplu<Nothing>(){
+        override fun toString() = "None"
+    }
+    data class Some<out T>(val value : T) : TippSimplu<T>()
+    companion object
+}
+
+fun <T,R> TippSimplu<T>.flatMap(fm : (T) -> TippSimplu<R>) : TippSimplu<R> = when(this){
+    TippSimplu.None -> TippSimplu.None
+    is TippSimplu.Some -> fm(value)
+}
+
+fun calculReducere(pret : TippSimplu<Double>) : TippSimplu<Double>{
+    return pret.flatMap { p ->
+        if(p > 50) {
+            TippSimplu.Some(5.0)
+        }
+        else {
+            TippSimplu.None
+        }
+    }
+}
+
+
+fun laJumate(a : Int)= when{
+    a %2 == 1 -> TippSimplu.Some(a / 2)
+    else -> TippSimplu.None
+}
+
+fun impOriDoi(a : Int) = when{
+    a % 2 == 1 -> TippSimplu.Some(a * 2)
+    else -> TippSimplu.None
+}
+
+fun main(){
+    println(calculReducere(TippSimplu.Some(95.0)))
+    println(calculReducere(TippSimplu.Some(25.0)))
+    println(calculReducere(TippSimplu.None))
+
+    val poatePatru = TippSimplu.Some(4)
+    val poateSapte = TippSimplu.Some(7)
+    println(poatePatru.flatMap { f->
+        poateSapte.flatMap { t->
+            TippSimplu.Some(f + t)
+        }
+    })
+    println("\n")
+
+    println(TippSimplu.Some(123).flatMap(::laJumate))
+    println(TippSimplu.Some(22).flatMap(::impOriDoi))
+    println(TippSimplu.None.flatMap(::laJumate))
+    println(TippSimplu.Some(35).flatMap(::laJumate).flatMap(::laJumate).flatMap(::impOriDoi))
+
+
+}

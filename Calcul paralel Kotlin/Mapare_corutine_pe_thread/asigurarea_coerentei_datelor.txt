@@ -1,0 +1,47 @@
+import kotlinx.coroutines.*
+import java.util.concurrent.locks.ReentrantLock
+import kotlin.system.measureTimeMillis
+
+suspend fun CoroutineScope.massiveRun(action: suspend () -> Unit){
+    val locking : ReentrantLock = ReentrantLock()
+    val n = 100
+    val k = 1000
+    val time = measureTimeMillis {
+        val jobs = List(n){
+            launch{
+                locking.lock()
+                repeat(k){
+                    action()
+                }
+                locking.unlock()
+            }
+        }
+        jobs.forEach{ it.join()}
+    }
+    println("S-au efectuat ${n*k} operatii in $time ms")
+}
+
+val mtContext = newFixedThreadPoolContext(2,"mtPooL")
+var counter = 0
+
+fun main() = runBlocking{
+    CoroutineScope(mtContext).massiveRun{
+        counter++
+    }
+    println("Numarator = $counter")
+}
+
+
+/* SOLUTIA 1
+<...>
+<...>
+
+var counter = AtomicInteger()
+
+fun main() = runBlocking{
+    CoroutineScope(mtContext).massiveRun{
+        counter.incrementAndGet()
+    }
+    println("Numarator = $counter")
+}
+ */

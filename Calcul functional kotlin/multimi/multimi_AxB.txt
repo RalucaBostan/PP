@@ -1,0 +1,14 @@
+fun main(args:Array<String>){
+    val A=mutableListOf<Int>()
+    val B=mutableListOf<Int>()
+
+    for(i in 0..15){
+        A.add((0..100).random())
+        B.add((0..100).random())
+    }
+
+    println(A)
+    println(B)
+    var AxB=A.map{a->B.map{b->Pair(a,b)}}
+    println(AxB)
+}

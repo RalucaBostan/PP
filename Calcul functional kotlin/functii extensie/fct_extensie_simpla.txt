@@ -1,0 +1,11 @@
+fun String.trimitLaConsola() = println(this)
+
+class Om(val nume : String)
+
+fun Om.spune() : String = "${this.nume} spune vaii"
+
+fun main(args : Array<String>){
+    "la examen".trimitLaConsola()
+    val x = Om("Bula")
+    x.spune().trimitLaConsola()
+}

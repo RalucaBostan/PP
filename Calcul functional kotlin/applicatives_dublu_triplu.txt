@@ -1,0 +1,11 @@
+fun <T,R> List<T>.ap(fab : List<(T) -> R>) : List<R> = fab.flatMap { f->this.map(f) }
+
+fun main(){
+    val numere = listOf(8,13,21,34)
+    val functii = listOf<(Int) -> Int>({i -> i * 2},{i -> i*3})
+    val rezultat = numere
+        .ap(functii)
+        .joinToString()
+
+    print(rezultat)
+}

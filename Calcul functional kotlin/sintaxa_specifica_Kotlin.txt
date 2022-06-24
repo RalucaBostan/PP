@@ -1,0 +1,28 @@
+import kotlin.math.max
+
+val maxim = {x:Int,y:Int->max(x,y)}
+
+fun main(args : Array<String>){
+    val invers : (Int,Int) -> Int
+    invers = {numar,numar2->
+        var arrays : Array<Int> = arrayOf(numar,numar2)
+        var i = 0
+        arrays.forEach {
+            var n = it
+            var numarInvers = 0
+            while (n > 0) {
+                val digit = n % 10
+                numarInvers = numarInvers * 10 + digit
+                n/=10
+            }
+            arrays[i] = numarInvers
+            i++
+        }
+        maxim(arrays[0],arrays[1])
+    }
+
+
+    println("Inversul lui max(123,112) : ${invers(123,112)}")
+    println("Inversul lui max(456,234) : ${invers(456,234)}")
+    println("Inversul lui max(789,432) : ${invers(789,432)}")
+}

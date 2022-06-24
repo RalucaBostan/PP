@@ -1,0 +1,15 @@
+fun apelCuIntoarcere(n : Int) : (String) -> Char{
+    return {it[n]}
+}
+
+fun main(args : Array<String>){
+    var pos = 4
+    println("${apelCuIntoarcere(1)("abc")}\n")
+    println("${apelCuIntoarcere(0)("def")}\n")
+    try{
+        println(apelCuIntoarcere(pos)("ghi"))
+    }
+    catch(e : StringIndexOutOfBoundsException){
+        println("Indexul ${pos} este inafara sirului")
+    }
+}

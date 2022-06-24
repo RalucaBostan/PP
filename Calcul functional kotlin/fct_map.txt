@@ -1,0 +1,10 @@
+fun main(){
+    val lista1 = listOf<Int>(7,15,24,19,8,45,65,55)
+    val lista2 = (1..12).shuffled()
+    val lista3 = (1..15).map{it}
+    println("lista 1 = ${lista1}")
+    val transformare = lista1.map{it * 2}
+    println("Transformare lista 1 cu map -> $transformare")
+    println("lista 2 = ${lista2}")
+    println("lista 3 = ${lista3}")
+}

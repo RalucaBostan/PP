@@ -1,0 +1,10 @@
+fun main(){
+    val lista = 1.rangeTo(20).toList()
+    println(lista)
+    println(lista.groupBy { it % 3 })
+    println(lista.groupingBy { it*2 }.eachCount())
+
+
+    val cuvant = "harababuraceamaimare"
+    println(cuvant.groupingBy { it }.eachCount())
+}

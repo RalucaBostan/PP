@@ -1,0 +1,25 @@
+import kotlinx.coroutines.*
+
+class Activity : CoroutineScope by CoroutineScope(Dispatchers.Default){
+    fun destroy(){
+        cancel()
+    }
+
+    fun doSomething(){
+        repeat(10){
+            i-> launch {
+                delay((i+1) * 200L)
+                println("Coroutine $i s-a terminat")
+            }
+        }
+    }
+}
+
+fun main() = runBlocking {
+    val activity = Activity()
+    activity.doSomething()
+    println("pornim coroutinele")
+    delay(500L)
+    println("Distrug activitatile!")
+    activity.destroy()
+}

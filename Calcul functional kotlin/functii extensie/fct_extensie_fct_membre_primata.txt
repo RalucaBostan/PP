@@ -1,0 +1,22 @@
+open class Primata(val name : String)
+
+fun Primata.vorbeste() = "$name : uhaha uhaha"
+
+open class MaimutaMare(name : String) : Primata(name)
+
+fun MaimutaMare.vorbeste() = "${this.name} : urlet"
+
+fun mesajScris(primata: Primata){
+    println(primata.vorbeste())
+}
+
+fun mesajScris1(maimutaMare: MaimutaMare){
+    println(maimutaMare.vorbeste())
+}
+
+fun main(args : Array<String>){
+    mesajScris(Primata("Alex"))
+    mesajScris(MaimutaMare("crr"))
+    mesajScris1(MaimutaMare("ciii"))
+    mesajScris1(Primata("jiiii") as MaimutaMare)
+}

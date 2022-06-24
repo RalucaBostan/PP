@@ -1,0 +1,17 @@
+class Sclav{
+    fun munca() = "*munca la birt*"
+    protected /*(private)*/ fun odihna() = "*odihna la vecina*"
+}
+
+fun Sclav.munca() = "*munca cu mila*"
+
+fun <T> Sclav.munca(t:T) = "*muncesc azi? Nuuuu $t*"
+
+fun Sclav.odihna() = "oidhna in sant"
+
+fun main(){
+    val sclav = Sclav()
+    println(sclav.munca())
+    println(sclav.munca("de maine ma apuc"))
+    print(sclav.odihna())
+}
