@@ -1,0 +1,5 @@
+fun main(args : Array<String>){
+    val s = " Hello World"
+    val length = s.javaClass.getMethod("length")
+    print(length.invoke(s) as Int)
+}

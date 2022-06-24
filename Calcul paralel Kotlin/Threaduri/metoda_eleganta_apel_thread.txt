@@ -1,0 +1,13 @@
+import java.lang.Thread.MAX_PRIORITY
+import java.lang.Thread.MIN_PRIORITY
+import kotlin.concurrent.thread
+
+fun main(args : Array<String>){
+    val thread1 = thread(start = true,name = "Speedy",priority = MAX_PRIORITY){
+        println("Threadul ${Thread.currentThread().name} s-a executat.")
+    }
+
+    val thread2 = thread(start = true,name="Turle",priority = MIN_PRIORITY){
+        println("Threadul ${Thread.currentThread().name} s-a executat.")
+    }
+}

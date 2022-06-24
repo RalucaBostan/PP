@@ -1,0 +1,22 @@
+import kotlin.system.measureTimeMillis
+val map = mutableMapOf<Int,Long>()
+
+fun memfib(k : Int) : Long{
+    return map.getOrPut(k){
+        when(k){
+            0 -> 1
+            1 -> 1
+            else -> memfib(k-1) + memfib(k-2)
+        }
+    }
+}
+
+
+fun main(args : Array<String>){
+    val k = 30
+    val time = measureTimeMillis{
+        println("Fibbonaci($k) = ${memfib(k)}")
+    }
+    println("Procesul a durat ${time} ms")
+    println(map)
+}

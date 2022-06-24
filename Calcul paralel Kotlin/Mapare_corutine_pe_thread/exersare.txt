@@ -1,0 +1,131 @@
+
+
+interface Element{
+    fun se_alfa_in(element: Element) : Boolean
+    fun adauga(element: Element)
+}
+
+
+class Om : Element{
+    override fun se_alfa_in(element: Element) : Boolean{
+        if(element.javaClass.name.equals("Om")){
+            element.adauga(this)
+            return true
+        }
+        return false
+    }
+
+    override fun adauga(element: Element) {
+        val x = 0
+    }
+}
+
+class Mar : Element{
+    override fun se_alfa_in(element: Element): Boolean {
+        if(element.javaClass.name.equals("Copac")){
+            element.adauga(this)
+            return true
+        }
+        return false
+    }
+
+    override fun adauga(element: Element) {
+        var x = 0
+    }
+}
+
+class Copac : Element{
+    var fructe : MutableList<Element> = mutableListOf()
+    override fun se_alfa_in(element: Element) : Boolean{
+        if(element.javaClass.name.equals("Curte")){
+            element.adauga(this)
+            return true
+        }
+        return false
+    }
+
+    override fun adauga(element: Element) {
+        this.fructe.add(element)
+    }
+}
+
+class Casa : Element{
+    var locuitori : MutableList<Element> = mutableListOf()
+    override fun se_alfa_in(element: Element) : Boolean{
+        if(element.javaClass.name.equals("Curte")){
+            element.adauga(this)
+            return true
+        }
+        return false
+    }
+
+    override fun adauga(element: Element) {
+        this.locuitori.add(element)
+    }
+}
+
+class Curte : Element{
+    var copaci : MutableList<Element> = mutableListOf()
+    lateinit var casa : Casa
+    override fun se_alfa_in(element: Element) : Boolean{
+        return true
+    }
+
+    override fun adauga(element: Element) {
+        if(element.javaClass.name.equals("Copac")){
+            this.copaci.add(element)
+        }
+        else if(element.javaClass.name.equals("Casa")){
+            this.casa = element as Casa
+        }
+    }
+    fun afisareRelatii(){
+        var string = "curte"
+        if(casa != null){
+            string += ">casa"
+            casa.locuitori.forEach{
+                string += ">om"
+            }
+        }
+        println(string)
+        copaci.forEach {
+            string = "curte>copac"
+            var copac = it as Copac
+            copac.fructe.forEach{
+                string += ">mar"
+            }
+            println(string)
+        }
+    }
+}
+
+fun main(){
+    var curte : Curte = Curte()
+    val keywords = mutableListOf<String>().apply {
+        add("curte")
+        add("casa")
+        add("copac")
+        add("mar")
+        add("om")
+    }
+
+    var text : List<String> = "intr-o curte este un copac in care se gaseste un mar. exista si o casa in care este un om . De curand a mai fost plantat un copac din care creste un mar pe an si in casa s-a mai mutat un om".split(" ")
+
+
+    for(cuvant in text){
+        for(pair in keywords){
+            if(cuvant.equals(pair)){
+                when(cuvant){
+                    "curte" -> println()
+                    "casa" -> Casa().se_alfa_in(curte)
+                    "copac" -> Copac().se_alfa_in(curte)
+                    "mar" -> Mar().se_alfa_in(curte.copaci.get(0))
+                    "om" -> Om().se_alfa_in(curte.casa)
+                }
+                break
+            }
+        }
+    }
+
+    curte.afisareRelatii()
+}

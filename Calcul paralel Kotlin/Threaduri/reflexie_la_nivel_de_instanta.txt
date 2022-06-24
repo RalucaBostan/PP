@@ -1,0 +1,27 @@
+import kotlin.reflect.KMutableProperty
+import kotlin.reflect.KMutableProperty1
+import kotlin.reflect.KProperty1
+
+class Persoana(val name : String, var age : Int){
+    fun present() = "Sunt $name, si am $age ani."
+    fun greet(other : String) = "Salut, $other, sunt $name."
+}
+
+fun <T> printProperty(instance : T, prop: KProperty1<T,*>){
+    println("${prop.name} = ${prop.get(instance)}")
+}
+
+fun <T> incrementProperty(instance : T, prop : KMutableProperty1<T, Int>){
+    val value = prop.get(instance)
+    prop.set(instance,value + 1)
+}
+
+
+fun main(args : Array<String>){
+    val person = Persoana("Lisa",23)
+    println(person.present())
+    printProperty(person,Persoana::name)
+    incrementProperty(person,Persoana::age)
+    println(person.present())
+
+}

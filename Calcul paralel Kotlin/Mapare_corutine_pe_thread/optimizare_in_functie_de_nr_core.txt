@@ -1,0 +1,34 @@
+import kotlinx.coroutines.*
+import kotlin.system.measureTimeMillis
+
+fun main(args : Array<String>) = runBlocking {
+    println("${Thread.activeCount()} fire de executie active la pornire")
+    val time = measureTimeMillis{
+        CreateCoroutines(10_0)
+    }
+    println("${Thread.activeCount()} fire de executie active la sfarsit")
+    println("Procesul a durat $time ms")
+}
+
+suspend fun CreateCoroutines(amount : Int){
+    val backgroundPool : CoroutineDispatcher by lazy {
+        val numProcessors = Runtime.getRuntime().availableProcessors()
+        when{
+            numProcessors <= 2 -> newFixedThreadPoolContext(2,"background")
+            else -> newFixedThreadPoolContext(numProcessors,"background")
+        }
+    }
+
+    val jobs = ArrayList<Job>()
+    for (i in 1..amount){
+        jobs += GlobalScope.launch(backgroundPool){
+            println("Am pornit $i in ${Thread.currentThread().name}")
+            delay(1000L)
+            println("S-a terminat $i din ${Thread.currentThread().name}")
+        }
+    }
+
+    jobs.forEach{
+        it.join()
+    }
+}

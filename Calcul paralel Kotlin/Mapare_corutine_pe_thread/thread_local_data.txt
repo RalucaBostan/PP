@@ -1,0 +1,16 @@
+import kotlinx.coroutines.*
+
+val threadLocal = ThreadLocal<String?>()
+
+fun main() = runBlocking<Unit> {
+    threadLocal.set("thread-ul cu pricina")
+    println("Pre-main,current thread : ${Thread.currentThread().name}, numit ${threadLocal.get()}")
+    val job = launch(Dispatchers.Default) {
+        threadLocal.set("launch")
+        println("Sunt acum in : ${Thread.currentThread().name}, numit ${threadLocal.get()}")
+        yield()
+        println("Dupa yield, sunt in: ${Thread.currentThread().name}, numit ${threadLocal.get()}")
+    }
+    job.join()
+    println("Dupa ce am oprit thread-urile interne sunt in : ${Thread.currentThread().name}, numit ${threadLocal.get()}")
+}

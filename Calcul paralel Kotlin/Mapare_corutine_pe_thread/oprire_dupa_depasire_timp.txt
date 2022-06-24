@@ -1,0 +1,22 @@
+import kotlinx.coroutines.*
+
+fun main(){
+    puturos()
+}
+
+fun puturos(){
+    runBlocking {
+        val job = launch {
+            try{
+                withTimeout(1000L){
+                    repeat(30){
+                        i-> println("Calculez $i...")
+                        delay(300L)
+                    }
+                }
+            }catch(e : TimeoutCancellationException){
+                println("sunt un lenes si ma opresc!")
+            }
+        }
+    }
+}

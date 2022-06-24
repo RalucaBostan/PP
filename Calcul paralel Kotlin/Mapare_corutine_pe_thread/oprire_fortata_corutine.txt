@@ -1,0 +1,17 @@
+import kotlinx.coroutines.cancelAndJoin
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+
+fun main() = runBlocking {
+    val job = launch {
+        repeat(30) { i ->
+            println("Calculam ceva $...")
+            delay(300L)
+        }
+    }
+    delay(1000L)
+    println("main : Utilizatorul a cerut oprirea calculelor")
+    job.cancelAndJoin()
+    print("main : Operatiunea in curs a fost abandonata")
+}

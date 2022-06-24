@@ -1,0 +1,49 @@
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.*
+import java.util.concurrent.atomic.AtomicLong
+import kotlin.concurrent.thread
+import kotlin.system.measureTimeMillis
+
+/*
+fun main(args : Array<String>){
+    println("Start")
+
+    GlobalScope.launch {
+        delay(1000)
+        println("Hello")
+    }
+    runBlocking { delay(1000) }
+    println("Stop")
+}*/
+/*
+fun main(args : Array<String>){
+    val c = AtomicLong()
+    var time = measureTimeMillis {
+        for (i in 1..10_000L) {
+            thread(start = true) {
+                c.addAndGet(i)
+            }
+        }
+    }
+    println("Proces create 10.000 threaduri:  $time ms") // 16895 ms
+
+    val cc = AtomicLong()
+    time = measureTimeMillis {
+        for (i in 1..10_000L) {
+            GlobalScope.launch {
+                cc.addAndGet(i)
+            }
+        }
+    }
+    println("Proces create 10.000 coroutine:  $time ms") // 1002 ms
+}
+
+*/
+
+fun main(args : Array<String>) {
+    var time = measureTimeMillis {
+        val deferred = (1..1_000_000L).map { n -> GlobalScope.async { n } }
+    }
+
+    print("Timp scurs $time ms") // 3013 ms !!!?? nice
+}

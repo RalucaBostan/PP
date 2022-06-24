@@ -1,0 +1,26 @@
+import kotlin.system.*
+import kotlinx.coroutines.*
+
+fun main(args : Array<String>) = runBlocking{ // runBLocking si GlobalScope.launch creeaza o coroutina noua
+                                              // dar runBlocking asteapta finalizarea executiei acesteia
+    println("${Thread.activeCount()} fire de executie active la pornire")
+    val time = measureTimeMillis {
+        createCoroutines(10_000)
+    }
+    println("${Thread.activeCount()} fire de executie active la sfarsit")
+    println("Procesul a durat $time ms")
+}
+
+suspend fun createCoroutines(amount : Int){
+    val jobs = ArrayList<Job>()
+    for(i in 1..amount){
+        jobs += GlobalScope.launch {
+            println("Am pornit $i in ${Thread.currentThread().name}")
+            delay(1000)
+            println("S-a terminat $i din ${Thread.currentThread().name}")
+        }
+    }
+    jobs.forEach{
+        it.join()
+    }
+}
