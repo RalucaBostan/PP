@@ -1,0 +1,41 @@
+data class Memento(val state : String)
+
+class Originator{
+    var state : String? = null
+
+    fun createMemento() : Memento{
+        return Memento(state!!)
+    }
+
+    fun setMemento(memento: Memento){
+        state = memento.state
+    }
+}
+
+class CareTaker{
+    private val stateList = ArrayList<Memento>()
+    fun addMemento(memento: Memento){
+        stateList.add(memento)
+    }
+    fun getMemento(index: Int) : Memento{
+        return stateList.get(index)
+    }
+}
+
+fun main(args : Array<String>){
+    val originator = Originator()
+    val careTaker = CareTaker()
+    originator.state = "Ironman"
+    careTaker.addMemento(originator.createMemento())
+    originator.state = "Captain America"
+    originator.state = "Hulk"
+    careTaker.addMemento(originator.createMemento())
+    originator.state = "Thor"
+    println("Starea curenta Origine : ${originator.state!!}")
+    println("Restaurare Origine")
+    originator.setMemento(careTaker.getMemento(1))
+    println("Starea curenta Origine : ${originator.state!!}")
+    println("Din nou restaurare")
+    originator.setMemento(careTaker.getMemento(0))
+    println("Starea curenta Origine : ${originator.state!!}")
+}

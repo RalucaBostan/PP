@@ -1,0 +1,40 @@
+interface Workshop{
+    fun work()
+}
+
+class Produce: Workshop{
+    override fun work(){
+        println("Produced")
+    }
+}
+
+class Assemble: Workshop{
+    override fun work(){
+        println("Assembled")
+    }
+}
+
+abstract class Vehicle(protected val workshop1:Workshop, protected val workshop2:Workshop){
+    abstract fun manufacture()
+}
+
+class Car(workshop1:Workshop, workshop2:Workshop):Vehicle(workshop1,workshop2){
+    override fun manufacture(){
+        println("Car")
+        workshop1.work()
+        workshop2.work()
+    }
+}
+
+class Bike(workshop1:Workshop, workshop2:Workshop):Vehicle(workshop1,workshop2){
+    override fun manufacture(){
+        println("Bike")
+        workshop1.work()
+        workshop2.work()
+    }
+}
+
+fun main(args:Array<String>){
+    val vehicle1: Vehicle=Car(Produce(),Assemble())
+    vehicle1.manufacture()
+}

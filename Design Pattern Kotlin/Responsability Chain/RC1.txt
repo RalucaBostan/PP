@@ -1,0 +1,56 @@
+abstract class AbstractLogger(var level : Int?){
+    companion object{
+        val INFO = 1
+        val DEBUG = 2
+        val ERROR = 3
+    }
+    var nextLogger : AbstractLogger? = null
+
+    fun setLogger(log : AbstractLogger){
+        nextLogger = log
+    }
+
+    abstract fun write(message : String)
+
+    fun logMessage(lvl : Int,message : String){
+        if(level!! <= lvl){
+            write(message)
+        }
+        if(nextLogger != null){
+            nextLogger!!.logMessage(lvl,message)
+        }
+    }
+}
+
+class ConsoleLogger(var lvl : Int) : AbstractLogger(lvl){
+    override fun write(message: String) {
+        println("Standard Console Logger : ${message}")
+    }
+}
+
+class ErrorLogger(var lvl : Int) : AbstractLogger(lvl){
+    override fun write(message: String) {
+        println("Standard Error Logger : ${message}")
+    }
+}
+
+class FileLogger(var lvl : Int) : AbstractLogger(lvl){
+    override fun write(message: String) {
+        println("File Logger : ${message}")
+    }
+}
+
+fun main(args : Array<String>){
+    val errorLogger : AbstractLogger = ErrorLogger(AbstractLogger.ERROR)
+    val fileLogger : AbstractLogger = FileLogger(AbstractLogger.DEBUG)
+    val consoleLogger : AbstractLogger = ConsoleLogger(AbstractLogger.INFO)
+
+    errorLogger.setLogger(fileLogger)
+    fileLogger.setLogger(consoleLogger)
+
+    errorLogger.logMessage(AbstractLogger.INFO,"This is an info")
+    errorLogger.logMessage(AbstractLogger.DEBUG,"This is a debugger")
+    errorLogger.logMessage(AbstractLogger.ERROR,"This is an error")
+
+
+}

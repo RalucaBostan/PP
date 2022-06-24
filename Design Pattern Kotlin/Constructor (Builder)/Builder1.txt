@@ -1,0 +1,18 @@
+data class Mail(val to:String, var title:String="", val cc:List<String> = listOf(), val bcc:List<String> = listOf(), val attachments:List<java.io.File> = listOf())
+
+class MailBuilder(val to:String){
+    var mail:Mail=Mail(to)
+    fun title(title:String):MailBuilder{
+        mail.title = title
+        return this
+    }
+    fun build():Mail{
+        return mail
+    }
+}
+
+fun main(args:Array<String>){
+    val mail=Mail("dddd","ddd")
+    println("$mail")
+    val email=MailBuilder("ssd").title("ssssd").build()
+}

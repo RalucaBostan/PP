@@ -1,0 +1,53 @@
+interface Om{
+    fun Descriere()
+    fun getName() : String
+}
+
+class Fiu(val nume : String,val varsta : Int) : Om{
+    override fun Descriere() {
+        println("${nume} are ${varsta} ani.")
+    }
+
+    override fun getName() : String{
+        return nume
+    }
+}
+
+class Parinte(val nume : String,val varsta: Int) : Om{
+    val fii : MutableList<Om> = mutableListOf()
+    fun AdaugaFiu(om : Om) = fii.add(om)
+    fun StergeFiu(om : Om) = fii.filter { it.getName() != om.getName() }.toMutableList()
+    override fun Descriere() {
+        print("Eu sunt tatal.   ")
+        println("${nume} are ${varsta} ani.")
+        fii.forEach{
+            print("\t")
+            it.Descriere()
+        }
+    }
+    override fun getName() : String {
+        return nume
+    }
+}
+
+fun main(args : Array<String>){
+    val Matei = Fiu("Matei",1)
+    val Alex = Parinte("Alex",19)
+    Alex.AdaugaFiu(Matei)
+    val Mike = Fiu("Mike",15)
+    val Andrei = Parinte("Andrei",40)
+    Andrei.AdaugaFiu(Mike)
+    Andrei.AdaugaFiu(Alex)
+    val Dan = Fiu("Dan",5)
+    val Dana = Parinte("Dana",25)
+    Dana.AdaugaFiu(Dan)
+    val Camelia = Fiu("Camelia",19)
+    val Dorel = Parinte("Dorel",50)
+    Dorel.AdaugaFiu(Camelia)
+    Dorel.AdaugaFiu(Dana)
+    val Marcel = Parinte("Marcel",80)
+    Marcel.AdaugaFiu(Dorel)
+    Marcel.AdaugaFiu(Andrei)
+
+    Marcel.Descriere()
+}

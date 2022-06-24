@@ -1,0 +1,44 @@
+open class Bike : Cloneable {
+    private var gears: Int = 0
+    private var bikeType: String? = null
+    var model: String? = null
+
+    init {
+        bikeType = "Standard"
+        model = "Carpati"
+        gears = 4
+    }
+
+    public override fun clone(): Bike {
+        return Bike()
+    }
+
+    fun makeAdvanced() {
+        bikeType = "Advanced"
+        model = "Jaguar"
+        gears = 6
+    }
+
+    override fun toString() : String{
+        var string : String = "\n"
+        string += "Type : " + bikeType + "\n"
+        string += "Model : " + model + "\n"
+        string += "Gears : " + gears + "\n"
+        return string
+    }
+}
+
+fun makeJaguar(basicBike : Bike) : Bike{
+    basicBike.makeAdvanced()
+    return basicBike
+}
+
+fun main(args : Array<String>){
+    val ordinaryBike = Bike()
+    println(ordinaryBike)
+    val basicBike = ordinaryBike.clone()
+    println(basicBike)
+    ordinaryBike.makeAdvanced()
+    println(ordinaryBike)
+    println(basicBike)
+}

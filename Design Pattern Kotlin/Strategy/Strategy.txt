@@ -1,0 +1,37 @@
+interface BookingStrategy{
+    var fare:Double
+}
+
+class CarBookingStrategy : BookingStrategy{
+    override var fare: Double = 12.5
+
+    override fun toString(): String {
+        return "CarBookingStrategy"
+    }
+}
+
+class TrainBookingStrategy : BookingStrategy{
+    override var fare: Double = 8.5
+
+    override fun toString(): String {
+        return "TrainBookingStrategy"
+    }
+}
+
+class Customer(var bookingStrategy: BookingStrategy){
+    fun calculateFare(numOfPassangers : Int) : Double{
+        val fare = numOfPassangers * bookingStrategy.fare
+        println("Calculating fares using $bookingStrategy")
+        return fare
+    }
+}
+
+fun main(args : Array<String>){
+    val cust = Customer(CarBookingStrategy())
+    var fare = cust.calculateFare(5)
+    println(fare)
+
+    cust.bookingStrategy = TrainBookingStrategy()
+    fare = cust.calculateFare(5)
+    println(fare)
+}

@@ -1,0 +1,37 @@
+class Shop(val nume : String){
+    val observers : MutableList<Entity> = mutableListOf()
+    fun AddObservers(observer: Entity) = observers.add(observer)
+    fun notifyObservers(){
+        observers.forEach{
+            it.update()
+        }
+    }
+}
+
+interface Entity{
+    fun update()
+}
+
+class Student(val name : String) : Entity{
+    override fun update() {
+        println("Studentul $name a fost notificat.")
+    }
+}
+
+class Universitate(val name :String) : Entity{
+    override fun update() {
+        println("Universitatea $name a fost notificata.")
+    }
+}
+
+fun main(args : Array<String>){
+    val Librarie : Shop = Shop("Carturesti").apply {
+        AddObservers(Student("Popescu Andre"))
+        AddObservers(Student("Gica Gavriil"))
+        AddObservers(Universitate("Gh.Asachi"))
+        AddObservers(Student("Nistor Brana"))
+        AddObservers(Universitate("UTCN"))
+    }
+    Librarie.notifyObservers()
+
+}

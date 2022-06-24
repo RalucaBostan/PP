@@ -1,0 +1,26 @@
+class Atom(val pozitie : Pair<Int,Int>){
+    fun Display() = println("Pozitie atom : (${pozitie.first},${pozitie.second}) ")
+}
+
+class Atomi(var atomi : MutableList<Atom>) : Iterable<Atom>{
+    override fun iterator(): Iterator<Atom> = AtomInterator(atomi)
+}
+
+
+class AtomInterator(val atomi : MutableList<Atom> = mutableListOf(),var current: Int = 0) : Iterator<Atom>{
+    override fun hasNext(): Boolean {
+        return atomi.size > current
+    }
+
+    override fun next(): Atom {
+        return atomi[current++]
+    }
+}
+
+fun main(args : Array<String>){
+    var atomi = Atomi(mutableListOf(Atom(Pair(2,3)),Atom(Pair(5,4)),Atom(Pair(54,5234))))
+    atomi.forEach{
+        it.Display()
+    }
+
+}

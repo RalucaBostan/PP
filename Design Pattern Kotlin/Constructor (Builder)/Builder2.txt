@@ -1,0 +1,69 @@
+interface HousePlan{
+    fun setBasement(basement: String)
+    fun setStructure(structure: String)
+    fun setRoof(roof: String)
+    fun setInterior(interior: String)
+}
+
+class House constructor(var basement1: String = "", var structure1:String = "", var roof1:String="", var interior1:String="" ):HousePlan{
+    override fun setBasement(basement: String){
+        this.basement1=basement
+    }
+    override fun setStructure(structure: String){
+        this.structure1=structure
+    }
+    override fun setRoof(roof:String){
+        this.roof1=roof
+    }
+    override fun setInterior(interior:String){
+        this.interior1=interior
+    }
+}
+
+interface HouseBuilder{
+    fun buildBasement(basement:String)
+    fun buildStructure(structure:String)
+    fun buildRoof(roof:String)
+    fun buildInterior(interior:String)
+    fun getHouse():House
+}
+
+class IglooHouseBuilder:HouseBuilder{
+    private var house:House = House()
+    override fun buildBasement(basement:String){
+        house.setBasement(basement)
+    }
+    override fun buildStructure(structure:String){
+        house.setStructure(structure)
+    }
+    override fun buildRoof(roof:String){
+        house.setRoof(roof)
+    }
+    override fun buildInterior(interior:String){
+        house.setInterior(interior)
+    }
+
+    override fun getHouse():House{
+        return house
+    }
+}
+
+class CivilEngineer constructor(val houseBuilder:HouseBuilder, val basement:String, val structure:String, val roof:String, val interior:String){
+    fun constructHouse(){
+        this.houseBuilder.buildBasement(this.basement)
+        this.houseBuilder.buildStructure(this.structure)
+        this.houseBuilder.buildRoof(this.roof)
+        this.houseBuilder.buildInterior(this.interior)
+    }
+    fun getHouse():House{
+        return this.houseBuilder.getHouse()
+    }
+}
+
+fun main(args:Array<String>){
+    val engineer=CivilEngineer(IglooHouseBuilder(), "sss","sss", "ss", "ss")
+    engineer.constructHouse()
+
+    val house=engineer.getHouse()
+    println(house)
+}

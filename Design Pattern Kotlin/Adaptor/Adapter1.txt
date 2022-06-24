@@ -1,0 +1,52 @@
+interface Bird{
+    public fun Fly()
+    public fun makeSound()
+}
+
+class Sparrow: Bird{
+    override fun Fly(){
+        println("Pasarea zboara")
+    }
+
+    override fun makeSound(){
+        println("Pasarea face sunete")
+    }
+}
+
+class Colibri: Bird{
+    override fun Fly(){
+        println("Pasarea zboara")
+    }
+
+    override fun makeSound(){
+        println("Pasarea face sunete")
+    }
+}
+
+interface ToyDuck{
+    public fun squeak()
+}
+
+class BirdAdapter(val bird: Bird): ToyDuck{
+    val birdAdapter : Bird = bird
+    override fun squeak(){
+        birdAdapter.makeSound()
+    }
+}
+
+class PlasticToyDuck: ToyDuck{
+    override fun squeak(){
+        println("Squeaaaaak")
+    }
+}
+
+fun main(args:Array<String>){
+    val sparrow=Sparrow()
+    var toyDuck: ToyDuck=PlasticToyDuck()
+    sparrow.Fly()
+    sparrow.makeSound()
+    toyDuck.squeak()
+    toyDuck=BirdAdapter(sparrow)
+    toyDuck.squeak()
+    println("toyDuck = $toyDuck")
+}

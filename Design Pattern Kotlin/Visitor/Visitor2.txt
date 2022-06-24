@@ -1,0 +1,62 @@
+import java.io.BufferedReader
+import java.io.InputStream
+
+interface GradinaZoo{
+    fun accept(visitor : Vizitator)
+}
+
+class Lei : GradinaZoo{
+    override fun accept(visitor: Vizitator) {
+        print("Cusca Leilor : Acceptati ? > ")
+        val kb: String? = readLine()
+        if(kb.equals("YES")) {
+            visitor.visit(this)
+        }
+        else{
+            println("Nu aveti permisiunea de a vizita")
+        }
+    }
+}
+
+class Girafe : GradinaZoo{
+    override fun accept(visitor: Vizitator) {
+        print("Cusca Girafelor : Acceptati ? > ")
+        val kb: String? = readLine()
+        if(kb.equals("YES")) {
+            visitor.visit(this)
+        }
+        else{
+            println("Nu aveti permisiunea de a vizita")
+        }
+    }
+}
+
+
+class Ursi : GradinaZoo{
+    override fun accept(visitor: Vizitator) {
+        print("Cusca Ursilor : Acceptati ? > ")
+        val kb: String? = readLine()
+        if(kb.equals("YES")) {
+            visitor.visit(this)
+        }
+        else{
+            println("Nu aveti permisiunea de a vizita")
+        }
+    }
+}
+
+
+class Vizitator{
+    fun visit(zoo : GradinaZoo){
+        println("Avem permisiunea de a vizita")
+    }
+}
+
+fun main(args : Array<String>){
+    val visitor = Vizitator()
+    val zoo : MutableList<GradinaZoo> = mutableListOf(Lei(),Ursi(),Girafe())
+    zoo.forEach{
+        it.accept(visitor)
+    }
+
+}

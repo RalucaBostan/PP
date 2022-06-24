@@ -1,0 +1,37 @@
+interface Shape{
+    fun draw()
+}
+
+class Circle:Shape{
+    override fun draw(){
+        println("Drawing circle")
+    }
+}
+class Square:Shape{
+    override fun draw(){
+        println("Drawing square")
+    }
+}
+class Rectangle:Shape{
+    override fun draw(){
+        println("Drawing rectangle")
+    }
+}
+
+class ShapeFactory{
+    fun getShape(shapeType:String ?):Shape?{
+        when(shapeType){
+            "Circle" -> return Circle()
+            "Rectangle" -> return Rectangle()
+            "Square" -> return Square()
+            else -> return null
+        }
+    }
+}
+
+fun main(args:Array<String>){
+    val shapeFactory= ShapeFactory()
+    val objects=shapeFactory.getShape("Circle")?.draw()
+    shapeFactory.getShape("Rectangle")?.draw()
+    shapeFactory.getShape("Square")?.draw()
+}

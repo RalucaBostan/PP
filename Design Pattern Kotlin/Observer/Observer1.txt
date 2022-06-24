@@ -1,0 +1,27 @@
+import kotlin.properties.Delegates
+
+interface ValueChangeListener{
+    fun onValueChanged(newValue : String)
+}
+
+class PrintingTextChangedListener : ValueChangeListener{
+    override fun onValueChanged(newValue: String) {
+        println("Text is changed to : $newValue")
+    }
+}
+
+class ObservableObject(listener: ValueChangeListener){
+    var text : String by Delegates.observable(
+        initialValue = "",
+        onChange = {
+            prop,old,new->listener.onValueChanged(new)
+        }
+    )
+}
+
+fun main(args : Array<String>){
+    val observableObject = ObservableObject(PrintingTextChangedListener())
+    observableObject.text = "Hello"
+    observableObject.text = "There"
+    observableObject.text = "DamnGoooood"
+}

@@ -1,0 +1,51 @@
+interface Employee{
+    fun showEmployeeDetails()
+}
+
+class Developer(val name : String,val empId : Int,val position : String) : Employee{
+    override fun showEmployeeDetails() {
+        println("Name : $name | Position : $position | Id : $empId")
+    }
+}
+
+class Manager(val name : String,val empId : Int,val position : String) : Employee {
+    override fun showEmployeeDetails() {
+        println("Name : $name | Position : $position | Id : $empId")
+    }
+}
+
+class CompanyDirectory : Employee{
+    val employeeList : MutableList<Employee> = mutableListOf()
+
+    fun AddEmployee(employee : Employee) = employeeList.add(employee)
+
+    fun RemoveEmployee(employee: Employee) = employeeList.remove(employee)
+
+    override fun showEmployeeDetails() {
+        employeeList.forEach{
+            it.showEmployeeDetails()
+        }
+    }
+}
+
+
+fun main(args : Array<String>){
+    val dev1 = Developer("Lokesh Sharma",100,"Pro Dev")
+    val dev2 = Developer("Vinay Sharma",101,"Junior Dev")
+
+    val devDir = CompanyDirectory().apply {
+        AddEmployee(dev1)
+        AddEmployee(dev2)
+    }
+
+    val man1 = Manager("Bill Gates",1,"CEO")
+    val man2 = Manager("Linda Gates",2,"CEO's wife")
+    val manDir = CompanyDirectory().apply {
+        AddEmployee(man1)
+        AddEmployee(man2)}
+
+    val Microsoft = CompanyDirectory().apply {
+        AddEmployee(devDir)
+        AddEmployee(manDir)
+    }.showEmployeeDetails()
+}

@@ -1,0 +1,93 @@
+class CoffeMachine {
+    var state: CoffeMachineState
+    val MAX_BEANS_QUANTITY = 100
+    val MAX_WATER_QUANTITY = 100
+    var beansQuantity = 0
+    var waterQuantity = 0
+    val offState = Off(this)
+    val noIngredients = NoIngredients(this)
+    val ready = Ready(this)
+
+    init {
+        state = offState
+    }
+
+    fun turnOn() = state.turnOn()
+    fun fillBeans(quantity: Int) = state.fillBeans(quantity)
+    fun fillWater(quantity: Int) = state.fillWater(quantity)
+    fun makeCoffee() = state.makeCoffee()
+    fun turnOff() = state.turnOff()
+    override fun toString(): String {
+        return "****COFFEE MACHINE - ${state.javaClass.name}" +
+                " | water quantity : $waterQuantity" +
+                " | beans quantity : $beansQuantity" +
+                "***".trimMargin()
+    }
+}
+
+abstract class CoffeMachineState(val coffeMachine:CoffeMachine){
+    open fun makeCoffee() : Unit = throw UnsupportedOperationException("Op. not supported")
+    open fun fillBeans(quantity:Int) : Unit = throw UnsupportedOperationException("Op. not supported")
+    open fun fillWater(quantity: Int) : Unit = throw UnsupportedOperationException("Op. not supported")
+    open fun turnOn() : Unit = throw UnsupportedOperationException("Op. not supported")
+    open fun turnOff() : Unit{
+        coffeMachine.state = coffeMachine.offState
+    }
+}
+
+
+class Off(coffeMachine: CoffeMachine) : CoffeMachineState(coffeMachine){
+    override fun turnOn() {
+        coffeMachine.state = coffeMachine.noIngredients
+        println("Coffee machine turned on")
+    }
+}
+
+class NoIngredients(coffeMachine: CoffeMachine) : CoffeMachineState(coffeMachine){
+    override fun fillBeans(quantity: Int) {
+        if((coffeMachine.beansQuantity +quantity) <= coffeMachine.MAX_BEANS_QUANTITY){
+            coffeMachine.beansQuantity += quantity
+            println("Beans filled in")
+            if(coffeMachine.waterQuantity > 0){
+                coffeMachine.state = coffeMachine.ready
+            }
+        }
+    }
+
+    override fun fillWater(quantity: Int) {
+        if((coffeMachine.waterQuantity + quantity) <= coffeMachine.MAX_WATER_QUANTITY){
+            coffeMachine.waterQuantity += quantity
+            println("Water filled in")
+            if(coffeMachine.beansQuantity > 0){
+                coffeMachine.state = coffeMachine.ready
+            }
+        }
+    }
+}
+
+class Ready(coffeMachine: CoffeMachine) : CoffeMachineState(coffeMachine){
+    override fun makeCoffee() {
+        coffeMachine.beansQuantity--
+        coffeMachine.waterQuantity--
+        println("Making coffee ... Done")
+        if(coffeMachine.beansQuantity == 0 || coffeMachine.waterQuantity == 0){
+            coffeMachine.state = coffeMachine.noIngredients
+        }
+    }
+}
+
+fun main(args : Array<String>){
+    val coffeMachine = CoffeMachine()
+    coffeMachine.turnOn()
+    println(coffeMachine)
+    coffeMachine.fillBeans(2)
+    println(coffeMachine)
+    coffeMachine.fillWater(2)
+    println(coffeMachine)
+    coffeMachine.makeCoffee()
+    println(coffeMachine)
+    coffeMachine.makeCoffee()
+    println(coffeMachine)
+    coffeMachine.turnOff()
+    println(coffeMachine)
+}

@@ -1,0 +1,66 @@
+class CricketData(val currentScoreDisplay  : CurrentScoreDisplay,val averageScoreDisplay : AverageScoreDisplay) {
+    var runs: Int = 0
+    var wickets: Int = 0
+    var overs: Float = 0F
+    private fun getLatestRun(): Int {
+        return 90
+    }
+
+    private fun getLatestWickets(): Int {
+        return 2
+    }
+
+    private fun getLatestOvers(): Float {
+        return 10.2f
+    }
+
+    public fun dataChanged() {
+        this.runs = this.getLatestRun()
+        this.wickets = this.getLatestWickets()
+        this.overs = this.getLatestOvers()
+
+        currentScoreDisplay.update(runs, wickets, overs)
+        averageScoreDisplay.update(runs, wickets, overs)
+    }
+}
+
+class AverageScoreDisplay{
+    var runRate : Float = 0.0f
+    var predictedScore : Int = 0
+
+    public fun update(runs : Int,wickets : Int,overs: Float){
+        this.runRate = (runs/overs).toFloat()
+        this.predictedScore = (this.runRate * 50).toInt()
+        this.display()
+    }
+
+    public fun display(){
+        println("\nCurrent Score Display:\nRun Rate : $runRate\nPredictedScore : $predictedScore")
+    }
+}
+
+class CurrentScoreDisplay{
+    private var runs : Int = 0
+    private var wickets : Int = 0
+    private var overs : Float = 0f
+
+    public fun update(runs : Int,wickets : Int,overs: Float){
+        this.runs = runs
+        this.wickets = wickets
+        this.overs = overs
+        this.display()
+    }
+
+    public fun display(){
+        println("\nAverage Score Display:\nRuns : $runs\nWickets : $wickets\nOvers : $overs")
+    }
+}
+
+fun main(args : Array<String>){
+    val avgscore : AverageScoreDisplay = AverageScoreDisplay()
+    val crtscore : CurrentScoreDisplay = CurrentScoreDisplay()
+
+    val cricketData : CricketData = CricketData(crtscore,avgscore)
+
+    cricketData.dataChanged()
+}

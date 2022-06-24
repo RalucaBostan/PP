@@ -1,0 +1,30 @@
+interface Shipment{
+    fun dispatchParcel(parcel:Pair<String,String>)
+}
+
+class SortingFacility(val location:String,var isWareHouseFull : Boolean) : Shipment{
+    override fun dispatchParcel(parcel: Pair<String, String>) {
+        println("$location facility doing dispatching business..")
+    }
+}
+
+class ParcelDispatcher : Shipment{
+    private var facility = listOf<SortingFacility>(
+        SortingFacility("North",false),
+        SortingFacility("North West",false),
+        SortingFacility("South",false),
+        SortingFacility("West",true),
+        SortingFacility("East",false)
+        )
+
+    override fun dispatchParcel(parcel: Pair<String, String>) {
+        val facilityTpParcelLocation = facility.filter { it.location.contains(parcel.second,true) && !it.isWareHouseFull}.first()
+        facilityTpParcelLocation.dispatchParcel(parcel)
+    }
+}
+
+fun main(args : Array<String>){
+    var pachet = "Smartphone" to "West"
+    var parcelDispatcher = ParcelDispatcher()
+    parcelDispatcher.dispatchParcel(pachet)
+}

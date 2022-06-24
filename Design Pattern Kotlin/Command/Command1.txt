@@ -1,0 +1,28 @@
+data class User(val name:String)
+
+interface Command{
+    fun execute(user:User)
+}
+
+class AddUser:Command{
+    override fun execute(user:User){
+        println("Adauga user")
+    }
+}
+
+class DeleteUser:Command{
+    override fun execute(user:User){
+        println("Sterge user")
+    }
+}
+
+class EditUser:Command{
+    override fun execute(user:User){
+        println("Editeaza user")
+    }
+}
+
+fun main(args:Array<String>){
+    val user=User("Kotlin")
+    val add=AddUser().execute(user)
+}

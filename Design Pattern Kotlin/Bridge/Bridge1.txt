@@ -1,0 +1,33 @@
+interface DrawAPI{
+    fun drawCircle(radius:Int, x:Int, y:Int)
+}
+
+abstract class Shape(protected val drawAPI: DrawAPI){
+    abstract fun draw()
+}
+
+class Circle(val radius:Int, val x:Int, val y:Int, drawAPI: DrawAPI):Shape(drawAPI)
+{
+    override fun draw(){
+        drawAPI.drawCircle(radius, x, y)
+    }
+}
+
+class RedCircle: DrawAPI{
+    override fun drawCircle(radius:Int, x:Int, y:Int){
+        println("Drawing Circle [red, $radius, $x, $y]")
+    }
+}
+
+class GreenCircle:DrawAPI{
+    override fun drawCircle(radius:Int, x:Int, y:Int){
+        println("Drawing Circle [green, $radius, $x, $y]")
+    }
+}
+
+fun main(args:Array<String>){
+    val redCircle=Circle(100,100,10,RedCircle())
+    val greenCircle=Circle(100,100,10,GreenCircle())
+    redCircle.draw()
+    greenCircle.draw()
+}

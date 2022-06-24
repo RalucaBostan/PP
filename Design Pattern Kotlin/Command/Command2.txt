@@ -1,0 +1,51 @@
+class Stock{
+    val name : String = "ABC"
+    val quantity : Int = 10
+    fun buy(){
+        println("Stock [Name $name | Quantity $quantity]")
+    }
+    fun sell(){
+        println("Stock [Name $name | Quantity $quantity]")
+    }
+}
+
+interface Order{
+    fun execute()
+}
+
+class BuyStock(val stock : Stock) : Order{
+    override fun execute(){
+        stock.buy()
+    }
+}
+
+class SellStock(val stock : Stock) : Order{
+    override fun execute() {
+        stock.sell()
+    }
+}
+
+class Broker{
+    val orderList : MutableList<Order> = mutableListOf()
+
+    fun takeOrder(order: Order){
+        orderList.add(order)
+    }
+
+    fun placeOrders(){
+        orderList.forEach{
+            it.execute()
+        }
+        orderList.clear()
+    }
+}
+
+fun main(args : Array<String>){
+    val stock = Stock()
+    val broker = Broker().apply {
+        takeOrder(BuyStock(stock))
+        takeOrder(SellStock(stock))
+    }
+
+    broker.placeOrders()
+}

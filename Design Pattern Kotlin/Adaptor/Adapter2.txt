@@ -1,0 +1,62 @@
+interface AdvancedMediaPlayer{
+    public fun playVid(fileName:String)
+    public fun playMp4(fileName:String)
+}
+
+class VidPlayer: AdvancedMediaPlayer{
+    override fun playVid(fileName:String){
+        println("Da play la video")
+    }
+    override fun playMp4(fileName:String){
+        println("Da play la Mp4")
+    }
+}
+
+class Mp4Player: AdvancedMediaPlayer{
+    override fun playVid(fileName:String){
+        println("Da play la video")
+    }
+
+    override fun playMp4(fileName:String){
+        println("Da play la Mp4")
+    }
+}
+
+interface MediaPlayer{
+    public fun play(AudioType : String,fileName: String)
+}
+
+class MediaAdapter: MediaPlayer{
+    var advancedMediaPlayer:AdvancedMediaPlayer? = null
+    override fun play(audioType:String, fileName: String){
+        if(audioType.equals("vid", true)){
+            if(advancedMediaPlayer==null){
+                advancedMediaPlayer=VidPlayer()
+            }
+            advancedMediaPlayer?.playVid(fileName)
+        }
+
+        else if(audioType.equals("mp4",true)){
+            if(advancedMediaPlayer==null){
+                advancedMediaPlayer=Mp4Player()
+            }
+            advancedMediaPlayer?.playMp4(fileName)
+        }
+    }
+}
+
+class AudioPlayer: MediaPlayer{
+    override fun play(audioType:String, fileName: String){
+        if(audioType.equals("vid",true)){
+            println("Playing vid file, $fileName")
+        }
+        else if(audioType.equals("mp4", true)){
+            println("Playing mp4 file, $fileName")
+        }
+    }
+}
+
+fun main(args:Array<String>){
+    val audioPlayer=AudioPlayer()
+    audioPlayer.play("mp4", "alone.mp4")
+}

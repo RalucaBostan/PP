@@ -1,0 +1,66 @@
+interface ComputerPart{
+    fun accept(computerPartVisitor: ComputerPartVisitor)
+}
+
+class Keyboard : ComputerPart{
+    override fun accept(computerPartVisitor: ComputerPartVisitor) {
+        computerPartVisitor.visit(this)
+    }
+}
+
+class Monitor : ComputerPart{
+    override fun accept(computerPartVisitor: ComputerPartVisitor) {
+        computerPartVisitor.visit(this)
+    }
+}
+
+class Mouse : ComputerPart{
+    override fun accept(computerPartVisitor: ComputerPartVisitor) {
+        computerPartVisitor.visit(this)
+    }
+}
+
+class Computer : ComputerPart{
+    var parts : MutableList<ComputerPart> = mutableListOf()
+    override fun accept(computerPartVisitor: ComputerPartVisitor) {
+        parts.add(Mouse())
+        parts.add(Keyboard())
+        parts.add(Monitor())
+        parts.forEach{
+            it.accept(computerPartVisitor)
+        }
+        computerPartVisitor.visit(this)
+    }
+}
+
+
+interface ComputerPartVisitor{
+    fun visit(computerPart : Computer)
+    fun visit(computerPart : Mouse)
+    fun visit(computerPart : Keyboard)
+    fun visit(computerPart : Monitor)
+}
+
+class ComputerPartDisplayVisitor : ComputerPartVisitor{
+    override fun visit(computerPart: Computer) {
+        println("Display Computer")
+    }
+
+    override fun visit(computerPart: Keyboard) {
+        println("Display Keyboard")
+    }
+
+    override fun visit(computerPart: Monitor) {
+        println("Display Monitor")
+    }
+
+    override fun visit(computerPart: Mouse) {
+        println("Display Mouse")
+    }
+}
+
+
+fun main(args : Array<String>){
+    val computer = Computer()
+    computer.accept(ComputerPartDisplayVisitor())
+}
